@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MyTone AI — M0.6 Voice Studio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="logo">MyTone AI</div>
+
+    <div class="hamburger" id="hamburgerBtn">
+      <span></span><span></span><span></span>
+    </div>
+
+    <ul class="navMenu" id="nav-links">
+      <li><a href="home.html" class="active">Home</a></li>
+      <li><a href="#">Voice App</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="docs.html">Docs</a></li>
+      <button id="modeToggle" class="btn-secondary">🌙 Dark Mode</button>
+    </ul>
+  </nav>
+
+  <main class="studio-layout container">
+    <!-- Left / Controls -->
+    <aside class="sidebar">
+      <div class="profile-card">
+        <h3>Voice Profile</h3>
+        <p class="muted">MyTone Default — Frontend Demo</p>
+      </div>
+
+      <div class="controls-card">
+        <h4>Tone</h4>
+        <select id="toneSelect" class="dropdown">
+          <option value="0.8">Low</option>
+          <option value="1" selected>Medium</option>
+          <option value="1.3">High</option>
+        </select>
+
+        <h4>Emotion</h4>
+        <select id="emotionSelect" class="dropdown">
+          <option value="normal">Normal</option>
+          <option value="happy">Happy</option>
+          <option value="friendly">Friendly</option>
+          <option value="soft">Soft</option>
+          <option value="sad">Sad</option>
+          <option value="energetic">Energetic</option>
+          <option value="calm">Calm</option>
+        </select>
+
+        <h4>Language</h4>
+        <select id="languageSelect" class="dropdown">
+          <!-- filled by JS -->
+        </select>
+
+        <div style="margin-top:12px;">
+          <button id="savePresetBtn" class="btn-primary">Save Preset</button>
+          <button id="resetSettingsBtn" class="btn-secondary">Reset</button>
+        </div>
+
+        <div class="preset-list" id="presetList" aria-live="polite"></div>
+      </div>
+
+      <div class="profile-card" style="margin-top:12px;">
+        <h4>History</h4>
+        <div id="historyList" class="history-list"></div>
+        <button id="clearHistoryBtn" class="btn-secondary" style="margin-top:8px;">Clear History</button>
+      </div>
+    </aside>
+
+    <!-- Center / Studio -->
+    <section class="studio" id="studioSection">
+      <h2>Voice Studio</h2>
+      <p class="muted">Type text, choose tone & emotion, preview with MyTone (Web Speech API).</p>
+
+      <textarea id="userInput" placeholder="Type or paste text here..." rows="6"></textarea>
+
+      <div class="studio-actions">
+        <button id="speakButton" class="btn-primary">🔊 Speak</button>
+        <button id="stopButton" class="btn-secondary">⏹ Stop</button>
+      </div>
+
+      <div id="waveContainer" class="wave-container">
+        <canvas id="waveCanvas"></canvas>
+      </div>
+
+      <div class="analyzer">
+        <div>Analyzer suggestion: <strong id="analyzerSuggestion">—</strong></div>
+        <div id="textPreview" class="text-highlight"></div>
+      </div>
+      <div id="aiResponse" class="status muted">Waiting for input...</div>
+    </section>
+
+    <!-- Right / Info -->
+    <aside class="right-col">
+      <div class="profile-card">
+        <h4>Quick Presets</h4>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <button class="preset-btn btn-secondary" data-preset="soft">Soft Story</button>
+          <button class="preset-btn btn-secondary" data-preset="energetic">Energetic</button>
+          <button class="preset-btn btn-secondary" data-preset="calm">Calm Narration</button>
+        </div>
+      </div>
+
+      <div class="profile-card" style="margin-top:12px;">
+        <h4>About M0.6</h4>
+        <p class="small muted">Frontend-only. Uses the browser's TTS. No backend cloning yet.</p>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    <p>© 2025 MyTone AI — M0.6 Frontend</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

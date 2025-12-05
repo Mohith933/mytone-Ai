@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyTone AI – Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+ <nav class="navbar">
+    <div class="logo">MyTone AI</div>
+
+    <div class="hamburger" id="hamburgerBtn">
+      <span></span><span></span><span></span>
+    </div>
+
+    <ul class="navMenu" id="nav-links">
+      <li><a href="home.html" class="active">Home</a></li>
+      <li><a href="index.html">Voice App</a></li>
+      <li><a href="#" id="openDashboard">Dashboard</a></li>
+      <li><a href="docs.html">Docs</a></li>
+      <button id="modeToggle" class="btn-secondary">🌙 Dark Mode</button>
+    </ul>
+  </nav>
+
+<section class="dashboard-section">
+  <h2>Dashboard</h2>
+  <p class="muted">Your voice settings & usage overview</p>
+
+  <div class="dashboard-grid">
+
+    <div class="dash-card">
+      <h3>Your Voices</h3>
+      <p>No custom voices created yet.</p>
+      <button class="btn-primary">+ Create Voice (Coming M0.7)</button>
+    </div>
+
+    <div class="dash-card">
+      <h3>Usage</h3>
+      <p>Voice generations this week: <strong>0</strong></p>
+      <p>API usage coming soon.</p>
+    </div>
+
+    <div class="dash-card">
+      <h3>Account</h3>
+      <p>Status: Free Tier (M0.6)</p>
+      <button class="btn-secondary">Upgrade (Coming M0.9)</button>
+    </div>
+
+  </div>
+</section>
+
+<script src="app.js"></script>
+</body>
+</html>
