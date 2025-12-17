@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MyTone AI – Dashboard</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MyTone AI — Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
- <nav class="navbar">
+<nav class="navbar">
     <div class="logo">MyTone AI</div>
 
     <div class="hamburger" id="hamburgerBtn">
@@ -19,39 +19,188 @@
     <ul class="navMenu" id="nav-links">
       <li><a href="home.html" class="active">Home</a></li>
       <li><a href="index.html">Voice App</a></li>
-      <li><a href="#" id="openDashboard">Dashboard</a></li>
-      <li><a href="docs.html">Docs</a></li>
-      <button id="modeToggle" class="btn-secondary">🌙 Dark Mode</button>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="#">Docs</a></li>
+      
+    <button id="modeToggle" class="btn-secondary">🌙 Dark Mode</button>
     </ul>
   </nav>
 
-<section class="dashboard-section">
-  <h2>Dashboard</h2>
-  <p class="muted">Your voice settings & usage overview</p>
+<main class="container" style="padding-top:24px;">
 
-  <div class="dashboard-grid">
+  <!-- ===================== -->
+  <!-- SUMMARY -->
+  <!-- ===================== -->
+  <section class="dashboard-section">
+    <h2>Overview</h2>
 
-    <div class="dash-card">
-      <h3>Your Voices</h3>
-      <p>No custom voices created yet.</p>
-      <button class="btn-primary">+ Create Voice (Coming M0.7)</button>
+    <div class="dashboard-grid">
+      <div class="profile-card">
+        <h3 id="statVoices">0</h3>
+        <p class="muted">Voice Plays</p>
+      </div>
+
+      <div class="profile-card">
+        <h3 id="statPresets">0</h3>
+        <p class="muted">Presets Saved</p>
+      </div>
+
+      <div class="profile-card">
+        <h3 id="statBlends">0</h3>
+        <p class="muted">Blend Profiles</p>
+      </div>
+
+      <div class="profile-card">
+        <h3 id="statExports">0</h3>
+        <p class="muted">Exports</p>
+      </div>
     </div>
+  </section>
 
-    <div class="dash-card">
-      <h3>Usage</h3>
-      <p>Voice generations this week: <strong>0</strong></p>
-      <p>API usage coming soon.</p>
+  <!-- ===================== -->
+  <!-- RECENT ACTIVITY -->
+  <!-- ===================== -->
+  <section class="dashboard-section">
+    <h2>Recent Activity</h2>
+
+    <div id="recentActivity" class="profile-card">
+      <p class="muted">No activity yet</p>
     </div>
+  </section>
 
-    <div class="dash-card">
-      <h3>Account</h3>
-      <p>Status: Free Tier (M0.6)</p>
-      <button class="btn-secondary">Upgrade (Coming M0.9)</button>
+  <!-- ===================== -->
+  <!-- SAVED PRESETS -->
+  <!-- ===================== -->
+  <section class="dashboard-section">
+    <h2>Your Voice Presets</h2>
+
+    <div id="presetGrid" class="dashboard-grid">
+      <div class="profile-card muted">No presets saved</div>
     </div>
+  </section>
 
-  </div>
-</section>
+  <!-- ===================== -->
+  <!-- VOICE PROFILE STATUS -->
+  <!-- ===================== -->
+  <section class="dashboard-section">
+    <h2>Voice Profile Status</h2>
 
-<script src="app.js"></script>
+    <div class="profile-card">
+      <p><strong>Similarity Score:</strong> <span id="similarityScoreDash">—</span></p>
+      <p><strong>Sample Uploaded:</strong> <span id="sampleStatus">No</span></p>
+      <p class="muted">Real voice cloning unlocks in M1.0</p>
+    </div>
+  </section>
+
+  <!-- ===================== -->
+  <!-- QUICK ACTIONS -->
+  <!-- ===================== -->
+  <section class="dashboard-section">
+    <h2>Quick Actions</h2>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <a href="index.html" class="btn-primary">🎙 Open Voice Studio</a>
+      <button id="clearDataBtn" class="btn-secondary">🧹 Clear Local Data</button>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>© 2025 MyTone AI — Dashboard M0.9</p>
+</footer>
+
+<script>
+/* ------------------------------
+   Helpers
+------------------------------ */
+function $(id){ return document.getElementById(id); }
+function load(key){ try { return JSON.parse(localStorage.getItem(key)||'[]'); } catch(e){ return []; } }
+
+/* ------------------------------
+   Load Data
+------------------------------ */
+const history = load('mytone_history_v0.7');
+const presets = load('mytone_presets_v0.7');
+const blends  = load('mytone_blends_v0.8');
+
+const modeToggle = $('modeToggle');
+
+// ---------- THEME (persist) ----------
+(function initTheme(){
+  try {
+    const t = localStorage.getItem('theme');
+    if (t === 'dark') document.body.classList.add('dark-mode');
+    if (modeToggle) modeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️ Light Mode' : '🌙 Dark Mode';
+  } catch(e){}
+})();
+if (modeToggle) {
+  modeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    try { localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light'); } catch(e){}
+    modeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️ Light Mode' : '🌙 Dark Mode';
+  });
+}
+
+/* ------------------------------
+   Stats
+------------------------------ */
+$('statVoices').textContent = history.length;
+$('statPresets').textContent = presets.length;
+$('statBlends').textContent = blends.length;
+$('statExports').textContent = history.filter(h => h.exported).length || 0;
+
+/* ------------------------------
+   Recent Activity
+------------------------------ */
+if (history.length) {
+  const h = history[0];
+  $('recentActivity').innerHTML = `
+    <p><strong>Last Text:</strong></p>
+    <p>${(h.text || '').slice(0,120)}</p>
+    <p class="muted">${new Date(h.ts).toLocaleString()}</p>
+  `;
+}
+
+/* ------------------------------
+   Presets Grid
+------------------------------ */
+const grid = $('presetGrid');
+grid.innerHTML = '';
+
+if (!presets.length) {
+  grid.innerHTML = '<div class="profile-card muted">No presets saved</div>';
+} else {
+  presets.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'profile-card';
+    card.innerHTML = `
+      <h4>${p.name}</h4>
+      <p class="muted">Tone: ${p.tone} | Speed: ${p.rate}</p>
+      <p class="muted">Emotion: ${p.emotion}</p>
+      <a href="index.html" class="btn-secondary" style="margin-top:8px;">▶ Use</a>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+/* ------------------------------
+   Voice Status (Fake ML)
+------------------------------ */
+$('similarityScoreDash').textContent =
+  history.length ? Math.min(90, 50 + history.length * 2) + '%' : '—';
+
+$('sampleStatus').textContent =
+  localStorage.getItem('voice_sample_uploaded') ? 'Yes' : 'No';
+
+/* ------------------------------
+   Clear Data
+------------------------------ */
+$('clearDataBtn').addEventListener('click', () => {
+  if (!confirm('Clear all MyTone AI local data?')) return;
+  localStorage.clear();
+  location.reload();
+});
+</script>
 </body>
 </html>
