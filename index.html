@@ -6,50 +6,33 @@
   <title>MyTone AI — M0.7 Voice Studio</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <!-- NAV -->
-   <nav class="navbar">
+
+<body> <!-- NAV -->
+  <nav class="navbar">
     <div class="logo">MyTone AI</div>
-
-    <div class="hamburger" id="hamburgerBtn">
-      <span></span><span></span><span></span>
-    </div>
-
+    <div class="hamburger" id="hamburgerBtn"> <span></span><span></span><span></span> </div>
     <ul class="navMenu" id="nav-links">
       <li><a href="home.html" class="active">Home</a></li>
       <li><a href="#">Voice App</a></li>
       <li><a href="dashboard.html">Dashboard</a></li>
-      <li><a href="docs.html">Docs</a></li>
-    <button id="modeToggle" class="btn-secondary">🌙 Dark Mode</button>
+      <li><a href="docs.html">Docs</a></li> <button id="modeToggle" class="btn-secondary">🌙 Dark Mode</button>
     </ul>
-  </nav>
-
-  <!-- MAIN LAYOUT -->
-  <main class="studio-layout container" id="mainLayout">
-    <!-- LEFT: Controls / Presets / History -->
+  </nav> <!-- MAIN LAYOUT -->
+  <main class="studio-layout container" id="mainLayout"> <!-- LEFT: Controls / Presets / History -->
     <aside class="sidebar" id="leftSidebar">
       <div class="profile-card">
         <h3>Voice Profile</h3>
         <p class="muted">M0.7 — Fake Custom Voices (UI)</p>
       </div>
-
       <div class="controls-card" style="margin-top:12px;">
-        <h4>Quick Controls</h4>
-
-        <label for="languageSelect">Language</label>
-        <select id="languageSelect" class="dropdown" aria-label="Language select">
-          <!-- Filled by JS -->
-        </select>
-
-        <label for="toneSelect" style="margin-top:8px;">Tone</label>
-        <select id="toneSelect" class="dropdown">
+        <h4>Quick Controls</h4> <label for="languageSelect">Language</label> <select id="languageSelect"
+          class="dropdown" aria-label="Language select"> <!-- Filled by JS --> </select> <label for="toneSelect"
+          style="margin-top:8px;">Tone</label> <select id="toneSelect" class="dropdown">
           <option value="0.8">Low</option>
           <option value="1" selected>Medium</option>
           <option value="1.3">High</option>
-        </select>
-
-        <label for="emotionSelect" style="margin-top:8px;">Emotion</label>
-        <select id="emotionSelect" class="dropdown">
+        </select> <label for="emotionSelect" style="margin-top:8px;">Emotion</label> <select id="emotionSelect"
+          class="dropdown">
           <option value="normal">Normal</option>
           <option value="happy">Happy</option>
           <option value="friendly">Friendly</option>
@@ -57,103 +40,183 @@
           <option value="sad">Sad</option>
           <option value="energetic">Energetic</option>
           <option value="calm">Calm</option>
-        </select>
-
-        <label for="rateRange" style="margin-top:8px;">Playback Speed <small class="muted">(<span id="rateValue">1.0x</span>)</small></label>
-        <input id="rateRange" type="range" min="0.5" max="2.0" step="0.05" value="1" class="dropdown"/>
-
-        <div style="display:flex;gap:8px;margin-top:10px;">
-          <button id="savePresetBtn" class="btn-primary">Save Preset</button>
-          <button id="resetSettingsBtn" class="btn-secondary">Reset</button>
-        </div>
+        </select> <label for="rateRange" style="margin-top:8px;">Playback Speed <small class="muted">(<span
+              id="rateValue">1.0x</span>)</small></label> <input id="rateRange" type="range" min="0.5" max="2.0"
+          step="0.05" value="1" class="dropdown" />
+        <div style="display:flex;gap:8px;margin-top:10px;"> <button id="savePresetBtn" class="btn-primary">Save
+            Preset</button> <button id="resetSettingsBtn" class="btn-secondary">Reset</button> </div>
       </div>
-
       <div class="profile-card" style="margin-top:12px;">
         <h4>Saved Presets</h4>
-        <div id="presetList" class="preset-list" aria-live="polite">
-          <!-- JS will render saved presets here -->
+        <div id="presetList" class="preset-list" aria-live="polite"> <!-- JS will render saved presets here -->
           <div class="small muted">No saved presets yet</div>
         </div>
       </div>
-
       <div class="profile-card" style="margin-top:12px;">
         <h4>History</h4>
         <div id="historyList" class="history-list">
           <div class="small muted">No history yet</div>
-        </div>
-        <button id="clearHistoryBtn" class="btn-secondary" style="margin-top:8px;">Clear History</button>
+        </div> <button id="clearHistoryBtn" class="btn-secondary" style="margin-top:8px;">Clear History</button>
       </div>
-    </aside>
-
-    <!-- CENTER: Studio -->
+    </aside> <!-- CENTER: Studio -->
     <section class="studio" id="studioSection" aria-labelledby="studioHeading">
       <h2 id="studioHeading">Voice Studio</h2>
-      <p class="muted">Type text, choose voice & emotion, preview instantly.</p>
-
-      <!-- Text area -->
-      <textarea id="userInput" placeholder="Type or paste your script here..." rows="6" autofocus></textarea>
-
-      <!-- Actions -->
-      <div class="studio-actions" style="margin-top:12px;">
-        <button id="speakButton" class="btn-primary">🔊 Speak</button>
-        <button id="stopButton" class="btn-secondary">⏹ Stop</button>
-        <button id="preview3sBtn" class="btn-secondary">▶ Preview 3s</button>
-      </div>
-
-      <!-- Waveform -->
-      <div id="waveContainer" class="wave-container" style="margin-top:14px;">
-        <canvas id="waveCanvas" height="72" aria-hidden="true"></canvas>
-      </div>
-
-      <!-- Analyzer -->
+      <p class="muted">Type text, choose voice & emotion, preview instantly.</p> <!-- Text area --> <textarea
+        id="userInput" placeholder="Type or paste your script here..." rows="6" autofocus></textarea> <!-- Actions -->
+      <div class="studio-actions" style="margin-top:12px;"> <button id="speakButton" class="btn-primary">🔊
+          Speak</button> <button id="stopButton" class="btn-secondary">⏹ Stop</button> <button id="preview3sBtn"
+          class="btn-secondary">▶ Preview 3s</button> </div> <!-- Waveform -->
+      <div id="waveContainer" class="wave-container" style="margin-top:14px;"> <canvas id="waveCanvas" height="72"
+          aria-hidden="true"></canvas> 
+</div> <!-- Analyzer -->
       <div class="analyzer" style="margin-top:10px;">
         <div style="display:flex;align-items:center;gap:10px;">
           <div><strong>Analyzer:</strong></div>
           <div id="analyzerSuggestion" class="small muted">—</div>
-          <div id="detectedEmotionLabel" class="small" style="margin-left:auto;font-weight:700;color:var(--accent);">Detected: —</div>
+          <div id="detectedEmotionLabel" class="small" style="margin-left:auto;font-weight:700;color:var(--accent);">
+            Detected: —</div>
         </div>
-        <div id="textPreview" class="text-highlight" aria-live="polite" style="margin-top:8px;">Preview will appear here...</div>
+        <div id="textPreview" class="text-highlight" aria-live="polite" style="margin-top:8px;">Preview will appear
+          here...</div>
       </div>
-
       <div id="aiResponse" class="status muted" style="margin-top:12px;">Waiting for input...</div>
-    </section>
 
-    <!-- RIGHT: Voices / Templates -->
+<div class="profile-card" style="margin-top:16px;">
+  <h3>Advanced Voice Mixing (M0.8)</h3>
+  <p class="muted small">Blend emotions + adjust warmth & clarity for fake custom voices.</p>
+
+  <label for="emotionA" style="margin-top:8px;">Emotion A</label>
+  <select id="emotionA" class="dropdown">
+    <option value="normal">Normal</option>
+    <option value="happy">Happy</option>
+    <option value="friendly">Friendly</option>
+    <option value="soft">Soft</option>
+    <option value="sad">Sad</option>
+    <option value="energetic">Energetic</option>
+    <option value="calm">Calm</option>
+  </select>
+
+  <label for="emotionB" style="margin-top:8px;">Emotion B</label>
+  <select id="emotionB" class="dropdown">
+    <option value="normal">Normal</option>
+    <option value="happy">Happy</option>
+    <option value="friendly">Friendly</option>
+    <option value="soft">Soft</option>
+    <option value="sad">Sad</option>
+    <option value="energetic">Energetic</option>
+    <option value="calm">Calm</option>
+  </select>
+
+  <label for="blendRange" style="margin-top:10px;">
+    Emotion Blend
+    <small class="muted">(<span id="blendValue">50%</span>)</small>
+  </label>
+  <input type="range" min="0" max="100" value="50" id="blendRange" class="dropdown"/>
+
+  <label for="warmthRange" style="margin-top:14px;">
+    Warmth
+    <small class="muted">(<span id="warmthValue">1.0</span>)</small>
+  </label>
+  <input type="range" min="0.5" max="1.5" step="0.01" value="1" id="warmthRange" class="dropdown"/>
+
+  <label for="clarityRange" style="margin-top:14px;">
+    Clarity
+    <small class="muted">(<span id="clarityValue">1.0</span>)</small>
+  </label>
+  <input type="range" min="0.5" max="1.5" step="0.01" value="1" id="clarityRange" class="dropdown"/>
+
+  <div style="display:flex;gap:10px;margin-top:16px;">
+    <button id="auditionBlendBtn" class="btn-primary">🎧 Audition Blend</button>
+    <button id="saveBlendPresetBtn" class="btn-secondary">💾 Save Blend</button>
+  </div>
+</div>
+      <!-- ========================= -->
+<!-- M0.9 — Voice Modeling Lab -->
+<!-- ========================= -->
+<div class="profile-card" style="margin-top:20px;">
+  <h3>Voice Modeling (M0.9)</h3>
+  <p class="muted small">Fake ML system — similarity score, tuner graph, sample upload, profile export.</p>
+
+  <!-- Similarity Score -->
+  <div class="similarity-box" style="margin-top:12px;">
+    <strong>Similarity Match:</strong>
+    <span id="similarityScore" style="color:var(--accent);font-weight:700;">—%</span>
+    <div id="similarityTip" class="small muted" style="margin-top:4px;">Waiting...</div>
+  </div>
+
+  <!-- Tuner Graph -->
+  <div class="tuner-graph" id="tunerGraph" style="
+    margin-top:16px;
+    height:140px;
+    background:var(--card-bg);
+    border:1px solid var(--secondary-border);
+    border-radius:10px;
+    position:relative;
+  ">
+    <div id="tunerDot" style="
+      width:16px;height:16px;
+      background:var(--accent);
+      border-radius:50%;
+      position:absolute;
+      left:50%;top:50%;
+      transform:translate(-50%,-50%);
+      cursor:pointer;
+    "></div>
+  </div>
+  <p class="small muted" style="margin-top:4px;">Drag dot to adjust Tone (X) & Speed (Y).</p>
+
+  <!-- Auto Voice Generator -->
+  <div style="margin-top:16px;">
+    <h4>Auto Voice Generator</h4>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;">
+      <button class="btn-secondary auto-voice" data-v="deep-male">Deep Male</button>
+      <button class="btn-secondary auto-voice" data-v="clear-female">Clear Female</button>
+      <button class="btn-secondary auto-voice" data-v="energetic-host">Energetic Host</button>
+      <button class="btn-secondary auto-voice" data-v="narrator">Narrator</button>
+      <button class="btn-secondary auto-voice" data-v="calm-assistant">Calm Assistant</button>
+    </div>
+  </div>
+
+  <!-- Upload Voice Sample -->
+  <div style="margin-top:20px;">
+    <h4>Upload Voice Sample</h4>
+    <input type="file" id="voiceSampleUpload" accept="audio/*" class="dropdown"/>
+    <p id="sampleInfo" class="small muted" style="margin-top:6px;">No file uploaded.</p>
+  </div>
+
+  <!-- Export Profile -->
+  <button id="exportVoiceProfile" class="btn-primary" style="margin-top:20px;width:100%;">
+    ⬇ Export Voice Profile (JSON)
+  </button>
+</div>
+    </section> <!-- RIGHT: Voices / Templates -->
     <aside class="right-col" id="rightPanel">
       <div class="profile-card">
         <h4>Voice Cards (Fake Custom Voices)</h4>
         <p class="muted">These are UI-driven variations — saved profiles will be plug-and-play in M0.8+.</p>
-
-        <div style="display:flex;flex-direction:column;gap:10px;margin-top:10px;">
-          <button class="preset-btn btn-secondary" data-preset="mytone-male">MyTone — Male</button>
-          <button class="preset-btn btn-secondary" data-preset="mytone-female">MyTone — Female</button>
-          <button class="preset-btn btn-secondary" data-preset="mytone-neutral">MyTone — Neutral</button>
-        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:10px;"> <button
+            class="preset-btn btn-secondary" data-preset="mytone-male">MyTone — Male</button> <button
+            class="preset-btn btn-secondary" data-preset="mytone-female">MyTone — Female</button> <button
+            class="preset-btn btn-secondary" data-preset="mytone-neutral">MyTone — Neutral</button> </div>
       </div>
-
       <div class="profile-card" style="margin-top:12px;">
         <h4>Script Templates</h4>
-        <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-          <button class="template-btn btn-secondary" data-template="podcast">Podcast Intro</button>
-          <button class="template-btn btn-secondary" data-template="narration">Narration / Story</button>
-          <button class="template-btn btn-secondary" data-template="product">Product Pitch</button>
-          <button class="template-btn btn-secondary" data-template="presentation">Presentation Opener</button>
-        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;"> <button
+            class="template-btn btn-secondary" data-template="podcast">Podcast Intro</button> <button
+            class="template-btn btn-secondary" data-template="narration">Narration / Story</button> <button
+            class="template-btn btn-secondary" data-template="product">Product Pitch</button> <button
+            class="template-btn btn-secondary" data-template="presentation">Presentation Opener</button> </div>
       </div>
-
       <div class="profile-card" style="margin-top:12px;">
         <h4>M0.7 Notes</h4>
-        <p class="small muted">This release improves UX, analyzer, and adds fake custom-voice UI so we can validate flows before real cloning.</p>
+        <p class="small muted">This release improves UX, analyzer, and adds fake custom-voice UI so we can validate
+          flows before real cloning.</p>
       </div>
     </aside>
-  </main>
-
-  <!-- FOOTER -->
+  </main> <!-- FOOTER -->
   <footer class="footer">
-    <p>© 2025 MyTone AI — M0.7 Frontend</p>
-  </footer>
-
-  <!-- App script (will enhance behavior) -->
-  <script src="app.js"></script>
+    <p>© 2025 MyTone AI</p>
+  </footer> <!-- App script (will enhance behavior) -->
+<script src="app.js"></script>
 </body>
 </html>
