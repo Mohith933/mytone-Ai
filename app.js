@@ -876,4 +876,33 @@ if (exportVoiceProfile) {
 // final trigger
 updateSimilarity();
 
+// =========================
+// Fake Auth (M0.9)
+// =========================
+const openSignup = document.getElementById("openSignup");
+const signupModal = document.getElementById("signupModal");
+const closeSignup = document.getElementById("closeSignup");
+const signupSubmit = document.getElementById("signupSubmit");
+const signupName = document.getElementById("signupName");
+
+if (openSignup && signupModal) {
+  openSignup.onclick = () => signupModal.classList.add("active");
+}
+
+if (closeSignup) {
+  closeSignup.onclick = () => signupModal.classList.remove("active");
+}
+
+if (signupSubmit) {
+  signupSubmit.onclick = () => {
+    const name = signupName.value.trim();
+    if (!name) return alert("Please enter your name");
+
+    localStorage.setItem("mytone_user", name);
+
+    window.location.href = "dashboard.html";
+  };
+}
+
+
 
